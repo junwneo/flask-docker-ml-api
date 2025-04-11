@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 import pandas as pd
-from sklearn.linear_model import LinearRegression
-import numpy as np
+import statsmodels.api as sm
 
 app = Flask(__name__)
 
@@ -15,21 +14,41 @@ data = pd.DataFrame({
           27.3, 24.5, 22.9, 18.4, 24.2, 21.0, 25.9, 23.2, 21.6, 22.8]
 })
 
-# Fit linear regression model: Y = α + τ·W + β·X + ε
-X_features = data[["W", "X"]]
-y_outcome = data["Y"]
-reg = LinearRegression().fit(X_features, y_outcome)
+# Fit regression model using statsmodels
+X_model = sm.add_constant(data[["W", "X"]])
+y_model = data["Y"]
+model = sm.OLS(y_model, X_model).fit()
 
-intercept = reg.intercept_
-tau = reg.coef_[0] # Treatment effect (ATE)
-beta = reg.coef_[1] # Spending coefficient
+# Extract coefficients
+intercept = model.params["const"]
+tau = model.params["W"]
+beta = model.params["X"]
 
-@app.route("/predict")
-def predict():
+# --- Route to estimate ATE and coefficients (Qn 1) ---
+@app.route("/estimate_ate")
+def estimate_ate():
     return jsonify({
         "intercept (α)": round(intercept, 3),
         "ATE (τ)": round(tau, 3),
         "Beta (β)": round(beta, 3)
+    })
+
+# --- Route to predict stakeholder engagement based on W and X (Qn 2) ---
+@app.route("/predict_engagement", methods=["GET"])
+def predict_engagement():
+    try:
+        Wi = float(request.args.get("W"))
+        Xi = float(request.args.get("X"))
+    except (TypeError, ValueError):
+        return jsonify({"error": "Invalid or missing input parameters W and X"}), 400
+
+    input_df = pd.DataFrame({"const": [1], "W": [Wi], "X": [Xi]})
+    pred_y = model.predict(input_df)[0]
+
+    return jsonify({
+        "W (treatment)": Wi,
+        "X (spending in $1,000s)": Xi,
+        "predicted engagement score (Ŷi)": round(pred_y, 2)
     })
 
 if __name__ == "__main__":
