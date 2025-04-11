@@ -1,2 +1,2 @@
-# flask-docker-ml-api
-Exercise 2 - Dockerization
+# DSS5105 Data Science Projects in Practice
+Exercise 2
