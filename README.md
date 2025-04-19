@@ -7,6 +7,15 @@ This project implements a causal inference model to estimate the Average Treatme
 
 ---
 
+## 📄 View the Report
+
+You can view the answers to the assignment in either of the following formats:
+
+- [📥 Download the Word version (ATE_Assignment_Answers.docx)](./ATE_Assignment_Answers.docx)
+- [📄 View the Markdown version (answer.md)](./answer.md)
+
+---
+
 ### 🚀 Features
 
 - Linear regression estimating ATE from simulated corporate data
