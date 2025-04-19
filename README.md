@@ -16,8 +16,22 @@ This project implements a causal inference model to estimate the Average Treatme
 - Codespaces-ready: no local setup required
 
 ---
+## 📦 Project Structure & Components
 
-## Running the API Test in Codespaces (via Docker)
+* app.py – Hosts a Flask API that loads a trained regression model and predicts stakeholder engagement scores based on input treatment (W) and sustainability spending (X).
+
+* Dockerfile – Defines the containerized environment including the base Python image, dependencies installation, and Flask app execution setup.
+
+* requirements.txt – Lists all necessary Python libraries such as Flask, pandas, and statsmodels for the API to run.
+
+* Containerization – Ensures the application runs consistently across different systems and simplifies deployment, collaboration, and reproducibility.
+
+* GitHub Codespaces – Provides a cloud-based development environment pre-configured with Docker, eliminating local setup issues.
+
+---
+## 📁 Getting Started
+
+### Running the API Test in Codespaces (via Docker)
 
 To run the API test, follow these steps to set up Docker in your Codespace environment:
 
