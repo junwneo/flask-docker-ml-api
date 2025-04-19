@@ -11,7 +11,7 @@ This project implements a causal inference model to estimate the Average Treatme
 
 You can view the answers to the assignment in either of the following formats:
 
-- [📥 Download the Word version (ATE_Assignment_Answers.docx)](./ATE_Assignment_Answers.docx)
+- [📥 Download the Word version (ATE_Assignment_Answers.docx)](./ATE_Assignment_Answers.docx) - Click the link to open the file preview, then click the **"Download"** button in the upper right corner to save a local copy.
 - [📄 View the Markdown version (answer.md)](./answer.md)
 
 ---
